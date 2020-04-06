@@ -36,3 +36,13 @@ output "connect" {
 output "c3" {
     value = zipmap(aws_instance.c3.*.public_dns, aws_instance.c3.*.tags)
 }
+
+
+
+# cluster data
+output "cluster_data" {
+  value = {
+    "ssh_username" = "ubuntu"
+    "ssh_key" = var.ssh_key_path
+  }
+}

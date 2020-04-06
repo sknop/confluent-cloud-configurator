@@ -7,7 +7,7 @@
 
 resource "aws_key_pair" "ssh_key" {
   key_name   = var.key_name
-  public_key = file("~/.ssh/terraform.pub")
+  public_key = file("${var.ssh_key_path}.pub")
 }
 
 
@@ -48,4 +48,3 @@ data "aws_ami" "ubuntu" {
 data "aws_availability_zones" "available" {
   state = "available"
 }
-

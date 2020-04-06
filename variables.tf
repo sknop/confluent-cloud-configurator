@@ -17,6 +17,12 @@ variable "key_name" {
   description = "Key name for cloud provider"
 }
 
+variable "ssh_key_path" {
+  type = string
+  default = "~/.ssh/terraform"
+  description = "path to private ssh key to be inserted into all instances"
+}
+
 variable "owner" {
   type = string
   description = "Prefix for all resource names"

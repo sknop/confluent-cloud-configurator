@@ -29,7 +29,7 @@ def get_values(raw_data, field_name):
 def parse_cp_data(raw_data):
     return {
         'zookeeper_nodes':get_values(raw_data, 'zookeepers'),
-        'kafka_broker_nodes': get_values(raw_data, 'brokers'), 
+        'kafka_broker_nodes': get_values(raw_data, 'brokers'),
         'schema_registry_nodes': get_values(raw_data, 'schema_registry'),
         'rest_proxy_nodes': get_values(raw_data, 'rest_proxy'),
         'ksql_nodes': get_values(raw_data, 'ksql'),
@@ -40,10 +40,12 @@ def parse_cp_data(raw_data):
 if __name__ == '__main__':
     raw_data = json.load(sys.stdin)
 
+    cluster_data = raw_data['cluster_data']['value']
+
     # TODO: move hard coded settings to terraform output variables
     ansible_vars = {
-        'user': 'ubuntu',
-        'keyfile': "~/.ssh/terraform"
+        'user': cluster_data['ssh_username'],
+        'keyfile': cluster_data['ssh_key']
     }
 
 
