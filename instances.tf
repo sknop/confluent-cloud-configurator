@@ -12,7 +12,7 @@ resource "aws_instance" "zookeepers" {
     Name = "${var.owner}-zookeeper-${count.index}-${element(data.aws_availability_zones.available.names, count.index)}"
     description = "zookeeper nodes - Managed by Terraform"
     role = "zookeeper"
-    zookeeperid = count.index
+    zookeeperid = count.index + 1
     Owner = var.owner
     sshUser = "ubuntu"
     region = var.region
@@ -37,7 +37,7 @@ resource "aws_instance" "brokers" {
     description = "broker nodes - Managed by Terraform"
     nice-name = "kafka-${count.index}"
     big-nice-name = "follower-kafka-${count.index}"
-    brokerid = count.index
+    brokerid = count.index + 1
     role = "broker"
     owner = var.owner
     sshUser = "ubuntu"

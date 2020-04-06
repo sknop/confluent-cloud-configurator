@@ -1,0 +1,44 @@
+{# Copyright 2020 Confluent
+Contributors:
+   Sven Erik Knop sven@confluent.io
+   Christoph Schubert cschubert@confluent.io
+
+ All rights reserved -#}
+{# Template for cp-ansible inventory file -#}
+{# Based on host_example.yml from https://github.com/confluentinc/cp-ansible -#}
+# Automatically created from terraform data on {{timestamp}}
+
+all:
+  vars:
+    ansible_connection: ssh
+    ansible_user: {{ ansible_vars.user}}
+    ansible_become: true
+    ansible_ssh_private_key_file: {{ ansible_vars.keyfile }}
+
+
+zookeeper:
+  hosts:
+    {% for zk in cluster_data.zookeeper_nodes -%}
+    {{ zk['host'] }}:
+      zookeeper_id: {{ zk['tags']['zookeeperid'] }}
+    {% endfor %}
+kafka_broker:
+  hosts:
+    {% for broker in cluster_data.kafka_broker_nodes -%}
+    {{ broker['host'] }}:
+      broker_id: {{ broker['tags']['brokerid'] }}
+      kafka_broker:
+        properties:
+          broker.rack: {{ broker['az'] }}
+    {% endfor %}
+
+control_center:
+  hosts:
+    {% for c3_instance in cluster_data.control_center_nodes -%}
+    {{ c3_instance }}:
+    {% endfor %}
+kafka_connect:
+  hosts:
+    {% for connect_instance in cluster_data.connect_nodes -%}
+    {{ connect_instance }}:
+    {% endfor -%}

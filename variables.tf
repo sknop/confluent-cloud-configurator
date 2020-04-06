@@ -68,7 +68,7 @@ variable broker_instance_type {
 }
 
 variable connect_instance_type {
-  default = "t2.micro"
+  default = "t2.medium"
 }
 
 variable schema_registry_instance_type {
@@ -84,5 +84,5 @@ variable ksql_instance_type {
 }
 
 variable c3_instance_type {
-  default = "t2.micro"
+  default = "t2.medium"
 }

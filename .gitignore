@@ -30,3 +30,8 @@ override.tf.json
 
 .idea
 *.iml
+
+# Local settings
+local.auto.tfvars
+# should not be tracked as it is a generated file:
+hosts.yml
