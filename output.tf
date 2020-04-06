@@ -7,27 +7,13 @@
 
 // Output
 
-output "zookeeper_public_dns" {
-  value = aws_instance.zookeepers.*.public_dns
+output "zookeepers" {
+  value = zipmap(aws_instance.zookeepers.*.public_dns,aws_instance.zookeepers.*.tags)
 }
 
-output "zookeeper_tags" {
-  value = aws_instance.zookeepers.*.tags
+output "brokers" {
+  value = zipmap(aws_instance.brokers.*.public_dns,aws_instance.brokers.*.tags)
 }
-
-output "broker_public_dns" {
-  value = aws_instance.brokers.*.public_dns
-}
-
-output "broker_tags" {
-  value = aws_instance.brokers.*.tags
-}
-
-
-output "broker_az" {
-  value = aws_instance.brokers.*.availability_zone
-}
-
 
 output "schema_registry_public_dns" {
   value = aws_instance.schema_registry.*.public_dns

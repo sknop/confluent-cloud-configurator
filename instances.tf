@@ -25,9 +25,8 @@ resource "aws_instance" "brokers" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = var.broker_instance_type
   availability_zone = element(data.aws_availability_zones.available.names, count.index)
-  # security_groups = ["${var.security_group}"]
   security_groups = [
-    aws_security_group.brokers.name, "${aws_security_group.ssh.name}"]
+    aws_security_group.brokers.name, aws_security_group.ssh.name]
   key_name = var.key_name
   root_block_device {
     volume_size = 1000 # 1TB
@@ -41,12 +40,10 @@ resource "aws_instance" "brokers" {
     role = "broker"
     owner = var.owner
     sshUser = "ubuntu"
-    # sshPrivateIp = true // this is only checked for existence, not if it's true or false by terraform.py (ati)
     createdBy = "terraform"
-    # ansible_python_interpreter = "/usr/bin/python3"
-    #EntScheduler = "mon,tue,wed,thu,fri;1600;mon,tue,wed,thu;fri;sat;0400;"
     region = var.region
     role_region = "brokers-${var.region}"
+    availability_zone = element(data.aws_availability_zones.available.names, count.index)
   }
 }
 
