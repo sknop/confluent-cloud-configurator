@@ -32,13 +32,32 @@ kafka_broker:
           broker.rack: {{ broker['az'] }}
     {% endfor %}
 
+schema_registry:
+  hosts:
+    {% for schema_registry_instance in cluster_data.schema_registry_nodes -%}
+    {{ schema_registry_instance }}:
+    {% endfor %}
+
+kafka_rest:
+  hosts:
+    {% for rest_proxy_instance in cluster_data.rest_proxy_nodes -%}
+    {{ rest_proxy_instance }}:
+    {% endfor %}
+
+ksql:
+  hosts:
+    {% for ksql_instance in cluster_data.ksql_nodes -%}
+    {{ ksql_instance }}:
+    {% endfor %}
+
+kafka_connect:
+  hosts:
+    {% for connect_instance in cluster_data.connect_nodes -%}
+    {{ connect_instance }}:
+    {% endfor %}
+
 control_center:
   hosts:
     {% for c3_instance in cluster_data.control_center_nodes -%}
     {{ c3_instance }}:
     {% endfor %}
-kafka_connect:
-  hosts:
-    {% for connect_instance in cluster_data.connect_nodes -%}
-    {{ connect_instance }}:
-    {% endfor -%}

@@ -36,8 +36,11 @@ def parse_cp_data(raw_data):
             'az': get_values(raw_data, 'broker_az'),
             'tags': get_values(raw_data, 'broker_tags')
         }),
-        'control_center_nodes': get_values(raw_data, "c3_public_dns"),
-        'connect_nodes': get_values(raw_data, "connect_public_dns")
+        'schema_registry_nodes': get_values(raw_data, 'schema_registry_public_dns'),
+        'rest_proxy_nodes': get_values(raw_data, 'rest_proxy_public_dns'),
+        'ksql_nodes': get_values(raw_data, 'ksql_public_dns'),
+        'connect_nodes': get_values(raw_data, "connect_public_dns"),
+        'control_center_nodes': get_values(raw_data, "c3_public_dns")
     }
 
 

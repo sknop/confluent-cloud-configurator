@@ -50,25 +50,9 @@ resource "aws_instance" "brokers" {
   }
 }
 
-resource "aws_instance" "connect-cluster" {
-  count         = var.connect_count
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = var.connect_instance_type
-  availability_zone = element(data.aws_availability_zones.available.names, count.index)
-  security_groups = [aws_security_group.ssh.name, aws_security_group.connect.name]
-  key_name = var.key_name
-  tags = {
-    Name = "${var.owner}-connect-${count.index}-${element(data.aws_availability_zones.available.names, count.index)}"
-    description = "Connect nodes - Managed by Terraform"
-    role = "connect"
-    Owner = var.owner
-    sshUser = "ubuntu"
-    region = var.region
-    role_region = "connect-${var.region}"
-  }
-}
 
-resource "aws_instance" "schema" {
+
+resource "aws_instance" "schema_registry" {
   count         = var.schema_registry_count
   ami           = data.aws_ami.ubuntu.id
   instance_type = var.schema_registry_instance_type
@@ -87,6 +71,24 @@ resource "aws_instance" "schema" {
   }
 }
 
+resource "aws_instance" "rest_proxy" {
+  count         = var.rest_proxy_count
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = var.rest_proxy_instance_type
+  availability_zone = element(data.aws_availability_zones.available.names, count.index)
+  security_groups = [aws_security_group.ssh.name, aws_security_group.connect.name]
+  key_name = var.key_name
+  tags = {
+    Name = "${var.owner}-rest-proxy-${count.index}-${element(data.aws_availability_zones.available.names, count.index)}"
+    description = "Rest proxy nodes - Managed by Terraform"
+    role = "REST proxy"
+    Owner = var.owner
+    sshUser = "ubuntu"
+    region = var.region
+    role_region = "rest-proxy-${var.region}"
+  }
+}
+
 resource "aws_instance" "ksql" {
   count         = var.ksql_count
   ami           = data.aws_ami.ubuntu.id
@@ -102,6 +104,24 @@ resource "aws_instance" "ksql" {
     sshUser = "ubuntu"
     region = var.region
     role_region = "ksql-${var.region}"
+  }
+}
+
+resource "aws_instance" "connect-cluster" {
+  count         = var.connect_count
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = var.connect_instance_type
+  availability_zone = element(data.aws_availability_zones.available.names, count.index)
+  security_groups = [aws_security_group.ssh.name, aws_security_group.connect.name]
+  key_name = var.key_name
+  tags = {
+    Name = "${var.owner}-connect-${count.index}-${element(data.aws_availability_zones.available.names, count.index)}"
+    description = "Connect nodes - Managed by Terraform"
+    role = "connect"
+    Owner = var.owner
+    sshUser = "ubuntu"
+    region = var.region
+    role_region = "connect-${var.region}"
   }
 }
 
