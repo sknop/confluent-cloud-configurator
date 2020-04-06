@@ -28,21 +28,13 @@ def get_values(raw_data, field_name):
 
 def parse_cp_data(raw_data):
     return {
-        'zookeeper_nodes': dictlist_to_listdic({
-            'host': get_values(raw_data, 'zookeeper_public_dns'),
-            # 'az': get_values(raw_data, 'broker_az'),
-            'tags': get_values(raw_data, 'zookeeper_tags')
-        }),
-        'kafka_broker_nodes': dictlist_to_listdic({
-            'host': get_values(raw_data, 'broker_public_dns'),
-            'az': get_values(raw_data, 'broker_az'),
-            'tags': get_values(raw_data, 'broker_tags')
-        }),
-        'schema_registry_nodes': get_values(raw_data, 'schema_registry_public_dns'),
-        'rest_proxy_nodes': get_values(raw_data, 'rest_proxy_public_dns'),
-        'ksql_nodes': get_values(raw_data, 'ksql_public_dns'),
-        'connect_nodes': get_values(raw_data, "connect_public_dns"),
-        'control_center_nodes': get_values(raw_data, "c3_public_dns")
+        'zookeeper_nodes':get_values(raw_data, 'zookeepers'),
+        'kafka_broker_nodes': get_values(raw_data, 'brokers'), 
+        'schema_registry_nodes': get_values(raw_data, 'schema_registry'),
+        'rest_proxy_nodes': get_values(raw_data, 'rest_proxy'),
+        'ksql_nodes': get_values(raw_data, 'ksql'),
+        'connect_nodes': get_values(raw_data, "connect"),
+        'control_center_nodes': get_values(raw_data, "c3")
     }
 
 if __name__ == '__main__':

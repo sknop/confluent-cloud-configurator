@@ -18,46 +18,46 @@ all:
 
 zookeeper:
   hosts:
-    {% for zk in cluster_data.zookeeper_nodes -%}
-    {{ zk['host'] }}:
-      zookeeper_id: {{ zk['tags']['zookeeperid'] }}
+    {% for host, tags in cluster_data.zookeeper_nodes.items() -%}
+    {{ host }}:
+      zookeeper_id: {{ tags['zookeeperid'] }}
     {% endfor %}
 kafka_broker:
   hosts:
-    {% for broker in cluster_data.kafka_broker_nodes -%}
-    {{ broker['host'] }}:
-      broker_id: {{ broker['tags']['brokerid'] }}
+    {% for host, tags in cluster_data.kafka_broker_nodes.items() -%}
+    {{ host }}:
+      broker_id: {{ tags['brokerid'] }}
       kafka_broker:
         properties:
-          broker.rack: {{ broker['az'] }}
+          broker.rack: {{ tags['availability_zone'] }}
     {% endfor %}
 
 schema_registry:
   hosts:
-    {% for schema_registry_instance in cluster_data.schema_registry_nodes -%}
-    {{ schema_registry_instance }}:
+    {% for host, tags in cluster_data.schema_registry_nodes.items() -%}
+    {{ host }}:
     {% endfor %}
 
 kafka_rest:
   hosts:
-    {% for rest_proxy_instance in cluster_data.rest_proxy_nodes -%}
-    {{ rest_proxy_instance }}:
+    {% for host, tags in cluster_data.rest_proxy_nodes.items() -%}
+    {{ host }}:
     {% endfor %}
 
 ksql:
   hosts:
-    {% for ksql_instance in cluster_data.ksql_nodes -%}
-    {{ ksql_instance }}:
+    {% for host, tags in cluster_data.ksql_nodes.items() -%}
+    {{ host }}:
     {% endfor %}
 
 kafka_connect:
   hosts:
-    {% for connect_instance in cluster_data.connect_nodes -%}
-    {{ connect_instance }}:
+    {% for host, tags in cluster_data.connect_nodes.items() -%}
+    {{ host }}:
     {% endfor %}
 
 control_center:
   hosts:
-    {% for c3_instance in cluster_data.control_center_nodes -%}
-    {{ c3_instance }}:
+    {% for host, tags in cluster_data.control_center_nodes.items() -%}
+    {{ host }}:
     {% endfor %}

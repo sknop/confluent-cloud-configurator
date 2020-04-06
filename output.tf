@@ -5,32 +5,34 @@
 //
 // All rights reserved
 
-// Output
+// Output a map for each role:
+// - keys: public FQDN of a node
+// - values: all tags of the corresponding instance
 
 output "zookeepers" {
-  value = zipmap(aws_instance.zookeepers.*.public_dns,aws_instance.zookeepers.*.tags)
+  value = zipmap(aws_instance.zookeepers.*.public_dns, aws_instance.zookeepers.*.tags)
 }
 
 output "brokers" {
-  value = zipmap(aws_instance.brokers.*.public_dns,aws_instance.brokers.*.tags)
+  value = zipmap(aws_instance.brokers.*.public_dns, aws_instance.brokers.*.tags)
 }
 
-output "schema_registry_public_dns" {
-  value = aws_instance.schema_registry.*.public_dns
+output "schema_registry" {
+    value = zipmap(aws_instance.schema_registry.*.public_dns, aws_instance.schema_registry.*.tags)
 }
 
-output "rest_proxy_public_dns" {
-  value = aws_instance.rest_proxy.*.public_dns
+output "rest_proxy" {
+    value = zipmap(aws_instance.rest_proxy.*.public_dns, aws_instance.rest_proxy.*.tags)
 }
 
-output "ksql_public_dns" {
-  value = aws_instance.ksql.*.public_dns
+output "ksql" {
+    value = zipmap(aws_instance.ksql.*.public_dns, aws_instance.ksql.*.tags)
 }
 
-output "connect_public_dns" {
-  value = aws_instance.connect-cluster.*.public_dns
+output "connect" {
+    value = zipmap(aws_instance.connect-cluster.*.public_dns, aws_instance.connect-cluster.*.tags)
 }
 
-output "c3_public_dns" {
-  value = aws_instance.c3.*.public_dns
+output "c3" {
+    value = zipmap(aws_instance.c3.*.public_dns, aws_instance.c3.*.tags)
 }
