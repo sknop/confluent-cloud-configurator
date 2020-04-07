@@ -40,12 +40,10 @@ def parse_cp_data(raw_data):
 if __name__ == '__main__':
     raw_data = json.load(sys.stdin)
 
-    cluster_data = raw_data['cluster_data']['value']
-
     # TODO: move hard coded settings to terraform output variables
     ansible_vars = {
-        'user': cluster_data['ssh_username'],
-        'keyfile': cluster_data['ssh_key']
+        'user': raw_data['ssh_username']['value'],
+        'keyfile': raw_data['ssh_key']['value']
     }
 
 

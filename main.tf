@@ -24,27 +24,8 @@ provider "aws" {
   region     = var.region
 }
 
-// Search for AMI rather than hard coding its ID - currently hard coded
-// TODO: Parameterize as variables to be able to configure from the outside
-
-data "aws_ami" "ubuntu" {
-  most_recent = true
-
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  owners = ["099720109477"] # Canonical
-}
 
 // Search for available availibility zones (say it quickly three times)
-
 data "aws_availability_zones" "available" {
   state = "available"
 }

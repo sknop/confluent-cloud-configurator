@@ -40,9 +40,6 @@ output "c3" {
 
 
 # cluster data
-output "cluster_data" {
-  value = {
-    "ssh_username" = "ubuntu"
-    "ssh_key" = var.ssh_key_path
-  }
+output "ssh_key" {
+  value = var.ssh_key_path
 }

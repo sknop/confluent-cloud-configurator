@@ -28,6 +28,12 @@ variable "owner" {
   description = "Prefix for all resource names"
 }
 
+variable "os" {
+  type = string
+  description = "The OS of the AMI"
+  default = "amazon-2_lts"
+}
+
 variable "admin_network" {
   default = "128.177.123.75"
   description = "My local network or bastion host, will be added to the security group rules"
