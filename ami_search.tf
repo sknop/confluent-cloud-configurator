@@ -5,7 +5,7 @@
 //
 // All rights reserved
 
-// usernames taken from https://alestic.com/2014/01/ec2-ssh-username/
+// ssh_user taken from https://alestic.com/2014/01/ec2-ssh-username/
 
 //TODO: double check some of the image owners
 //TODO: some of the images reference SSDs, should we look for more generic search criteria?
@@ -16,27 +16,27 @@ locals {
       image_owner = "099720109477" #CANONICAL
       ssh_user = "ubuntu"
     }
-    ubuntu-14.04 = {
+    "ubuntu-14.04" = {
       regex = "^ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-.*"
       image_owner = "099720109477" #CANONICAL
       ssh_user = "ubuntu"
     }
-    ubuntu-16.04= {
+    "ubuntu-16.04" = {
       regex = "^ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-.*"
       image_owner = "099720109477" #CANONICAL
       ssh_user = "ubuntu"
     }
-    ubuntu-18.04 = {
+    "ubuntu-18.04" = {
       regex = "^ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-.*"
       image_owner = "099720109477" #CANONICAL
       ssh_user = "ubuntu"
     }
-    ubuntu-18.10 = {
+    "ubuntu-18.10" = {
       regex = "^ubuntu/images/hvm-ssd/ubuntu-cosmic-18.10-amd64-server-.*"
       image_owner = "099720109477" #CANONICAL
       ssh_user = "ubuntu"
     }
-    ubuntu-19.04 = {
+    "ubuntu-19.04" = {
       regex = "^ubuntu/images/hvm-ssd/ubuntu-disco-19.04-amd64-server-.*"
       image_owner = "099720109477" #CANONICAL
       ssh_user = "ubuntu"
