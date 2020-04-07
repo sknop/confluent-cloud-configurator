@@ -48,8 +48,8 @@ resource "azurerm_network_security_rule" "ssh" {
   destination_address_prefix  = "*"
 }
 
-resource "azurerm_public_ip" "cp" {
-  count = 3
+resource "azurerm_public_ip" "cp_broker" {
+  count = var.broker_count
   name                         = "${var.owner}-cp-public-ip-${count.index}"
   location                     = azurerm_resource_group.cp.location
   resource_group_name          = azurerm_resource_group.cp.name

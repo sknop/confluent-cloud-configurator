@@ -6,5 +6,5 @@
 // All rights reserved
 
 output "vm_public_ip" {
-     value = azurerm_public_ip.cp.*.ip_address
+     value = azurerm_public_ip.cp_broker.*.ip_address
 }
